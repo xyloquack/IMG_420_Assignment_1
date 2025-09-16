@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://cd4uo0uq8isv6"]
+
+[ext_resource type="Script" uid="uid://c817bs3n388tf" path="res://main_menu.gd" id="1_06t4h"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_06t4h")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.294118, 0.6, 1)
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -56.5
+offset_top = 60.5
+offset_right = 56.5
+offset_bottom = 123.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "Start!"
+
+[node name="GameName" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -87.5
+offset_top = -155.5
+offset_right = 87.5
+offset_bottom = -72.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "Move!"
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

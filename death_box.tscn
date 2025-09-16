@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://chp751ii7swv4"]
+
+[ext_resource type="Script" uid="uid://0wpiel7yuwl3" path="res://death_box.gd" id="1_4yumv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5poei"]
+size = Vector2(10000, 20)
+
+[node name="DeathArea" type="Area2D"]
+script = ExtResource("1_4yumv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5poei")
+debug_color = Color(0.988763, 0, 0.29829, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

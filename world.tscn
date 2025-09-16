@@ -1,35 +1,74 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0h07t5wtpr70"]
+[gd_scene load_steps=12 format=3 uid="uid://d0h07t5wtpr70"]
 
 [ext_resource type="Script" uid="uid://2ohpo0qnfovx" path="res://world.gd" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://co28on2vm3a6u" path="res://restart_screen.tscn" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://c4ofxsbndmexq" path="res://player.tscn" id="2_tlwt5"]
+[ext_resource type="Script" uid="uid://5fbba5jtan4a" path="res://platform.gd" id="3_036b0"]
+[ext_resource type="PackedScene" uid="uid://chp751ii7swv4" path="res://death_box.tscn" id="4_aqk2v"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gv5m4"]
-size = Vector2(10, 800)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwbse"]
+size = Vector2(500, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f3sb7"]
-size = Vector2(2000, 10)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_036b0"]
+size = Vector2(20, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pkg7o"]
+size = Vector2(500, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbfbk"]
+size = Vector2(100, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ioo17"]
+size = Vector2(20, 300)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wse8f"]
+size = Vector2(20, 300)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_f3sb7")
 
+[node name="PlayerStartPosition" type="Marker2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("2_tlwt5")]
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-1000, 400)
-shape = SubResource("RectangleShape2D_gv5m4")
-
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionShape2D"]
-polygon = PackedVector2Array(5, -400, -5, -400, -5, 400, 5, 400)
+position = Vector2(0, 70)
+shape = SubResource("RectangleShape2D_dwbse")
+script = ExtResource("3_036b0")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(1000, 400)
-shape = SubResource("RectangleShape2D_gv5m4")
-
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionShape2D2"]
-polygon = PackedVector2Array(5, -400, -5, -400, -5, 400, 5, 400)
+position = Vector2(567, -120)
+shape = SubResource("RectangleShape2D_036b0")
+script = ExtResource("3_036b0")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(0, 800)
-shape = SubResource("RectangleShape2D_f3sb7")
+position = Vector2(1161, -310)
+shape = SubResource("RectangleShape2D_pkg7o")
+script = ExtResource("3_036b0")
 
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D/CollisionShape2D3"]
-polygon = PackedVector2Array(1000, 5, 1000, -5, -1000, -5, -1000, 5)
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="StaticBody2D"]
+z_index = -1
+position = Vector2(627, -310)
+shape = SubResource("RectangleShape2D_gbfbk")
+script = ExtResource("3_036b0")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1401, -548)
+shape = SubResource("RectangleShape2D_ioo17")
+script = ExtResource("3_036b0")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1041, -792)
+shape = SubResource("RectangleShape2D_wse8f")
+script = ExtResource("3_036b0")
+
+[node name="RestartScreen" parent="." instance=ExtResource("2_fj7yv")]
+visible = false
+
+[node name="DeathArea" parent="." instance=ExtResource("4_aqk2v")]
+position = Vector2(2000, 900)
+
+[connection signal="death" from="." to="." method="_on_death"]
+[connection signal="restart" from="." to="." method="_on_restart"]

@@ -1,8 +1,17 @@
 extends Node2D
 
-var PLAYER = load("uid://c4ofxsbndmexq")
+signal death
+signal restart
 
 func _ready():
-	var player = PLAYER.instantiate()
-	player.global_position = Vector2(0, 0)
-	add_child(player)
+	print(self)
+	$Player.position = $PlayerStartPosition.position
+
+func _on_death():
+	print("Death Screen!")
+	$RestartScreen.death_screen()
+
+func _on_restart():
+	print("Restarting!")
+	$Player.position = $PlayerStartPosition.position
+	$Player.velocity = Vector2.ZERO

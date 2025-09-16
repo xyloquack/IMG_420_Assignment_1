@@ -1,30 +1,79 @@
 extends CharacterBody2D
 
+signal kill
+
 @export var max_speed: float
 @export var acceleration: float
 @export var friction: float
 @export var gravity: float
 @export var jump_speed: float
+@export var wall_jump_off_speed: float
+
+var world
+var direction = 0
+var on_wall = false
+var was_on_wall = false
+
+func _ready():
+	world = get_tree().get_root().get_node("World")
 
 func get_direction(delta):
-	var direction = 0
-	if Input.is_action_pressed("right"):
-		direction += 1
-	if Input.is_action_pressed("left"):
-		direction -= 1
-	var current_friction = friction
+	on_wall = is_on_wall()
+	
+	if $WallJumpTimer.is_stopped():
+		direction = 0
+		
+		if Input.is_action_pressed("right"):
+			direction += 1
+			
+		if Input.is_action_pressed("left"):
+			direction -= 1
+			
+	var current_friction = friction * sqrt(abs(velocity.x) / max_speed)
 	var current_acceleration = acceleration
+	var current_gravity = gravity
+	
 	if not is_on_floor():
-		current_acceleration /= 2
+		current_acceleration /= 3
+		current_friction /= 2
+	else:
+		$CoyoteTimer.start()
+		
 	if abs(velocity.x) > max_speed:
 		current_friction += acceleration
+		
+	if is_on_wall_only():
+		current_gravity /= 2
+	elif Input.is_action_pressed("up"):
+		current_gravity /= 1.3
+		
 	velocity += Vector2.RIGHT * direction * current_acceleration * delta
 	velocity -= Vector2(velocity.normalized().x, 0) * current_friction * delta
-	velocity += Vector2.DOWN * gravity * delta
+	velocity += Vector2.DOWN * current_gravity * delta
 	
-	if Input.is_action_pressed("up") and is_on_floor():
+	if on_wall and not was_on_wall:
+		velocity.y = 0
+	
+	if Input.is_action_just_pressed("up") and (is_on_floor() or not $CoyoteTimer.is_stopped()) and not is_on_wall_only():
 		velocity += Vector2.UP * jump_speed
+		
+	if Input.is_action_just_pressed("up") and is_on_wall_only():
+		velocity += Vector2.UP * jump_speed
+		
+		if velocity.y > -jump_speed:
+			velocity.y = -jump_speed
+			
+		velocity += Vector2.RIGHT * get_wall_normal() * wall_jump_off_speed
+		direction = get_wall_normal().x
+		$WallJumpTimer.start()
+		
+	was_on_wall = on_wall
 
 func _physics_process(delta):
 	get_direction(delta)
 	move_and_slide()
+
+func _on_kill() -> void:
+	print("Death!")
+	print(world)
+	world.emit_signal("death")
