@@ -2,6 +2,8 @@ extends CharacterBody2D
 
 signal kill
 signal bounce
+signal boost
+signal win
 
 @export var max_speed: float
 @export var acceleration: float
@@ -30,27 +32,33 @@ func get_direction(delta):
 		if Input.is_action_pressed("left"):
 			direction -= 1
 			
-	var current_friction = friction * sqrt(abs(velocity.x) / max_speed)
+	var current_friction = friction * abs(velocity.x) / max_speed
 	var current_acceleration = acceleration
 	var current_gravity = gravity
 	
+	if abs(velocity.x) > max_speed:
+		current_friction = (abs(velocity.x) / (max_speed)) * (acceleration - friction) + friction
+	else:
+		current_friction = friction
+	
 	if not is_on_floor():
-		current_acceleration /= 3
+		current_acceleration /= 2
 		current_friction /= 2
 	else:
 		$CoyoteTimer.start()
-		
-	if abs(velocity.x) > max_speed:
-		current_friction += acceleration
 		
 	if is_on_wall_only():
 		current_gravity /= 2
 	elif Input.is_action_pressed("up"):
 		current_gravity /= 1.3
 		
-	velocity += Vector2.RIGHT * direction * current_acceleration * delta
-	velocity -= Vector2(velocity.normalized().x, 0) * current_friction * delta
-	velocity += Vector2.DOWN * current_gravity * delta
+	velocity.x += direction * current_acceleration * delta
+	var current_moving_direction = 1 if (velocity.x > 0) else -1
+	velocity.x -= current_moving_direction * current_friction * delta
+	var new_moving_direciton = 1 if (velocity.x > 0) else -1
+	if current_moving_direction != new_moving_direciton:
+		velocity.x = 0
+	velocity.y += current_gravity * delta
 	
 	if on_wall and not was_on_wall:
 		velocity.y = 0
@@ -75,12 +83,18 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _on_kill() -> void:
-	print("Death!")
-	print(world)
 	world.emit_signal("death")
-
 
 func _on_bounce() -> void:
 	if $BounceCooldown.is_stopped():
 		$BounceCooldown.start()
 		velocity.y = -1500
+		
+func _on_boost(boost_direction) -> void:
+	if $BoostCooldown.is_stopped():
+		$BoostCooldown.start()
+		velocity.x += 4000 * boost_direction
+		
+func _on_win():
+	print("Win!")
+	world.emit_signal("win")

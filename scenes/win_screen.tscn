@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://df52o4ffgr4nc"]
+
+[ext_resource type="Script" uid="uid://bsrtt4d2gbbwc" path="res://scripts/win_screen.gd" id="1_wv5lq"]
+
+[node name="WinScreen" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_wv5lq")
+
+[node name="TimeTaken" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -91.5
+offset_right = 20.0
+offset_bottom = -68.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="YouWin" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = -169.5
+offset_right = 123.0
+offset_bottom = -86.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "You win!"
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = 76.0
+offset_right = 4.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

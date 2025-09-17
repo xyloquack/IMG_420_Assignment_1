@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://cd4uo0uq8isv6"]
 
-[ext_resource type="Script" uid="uid://c817bs3n388tf" path="res://main_menu.gd" id="1_06t4h"]
+[ext_resource type="Script" uid="uid://c817bs3n388tf" path="res://scripts/main_menu.gd" id="1_l6cm7"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
-script = ExtResource("1_06t4h")
+script = ExtResource("1_l6cm7")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15

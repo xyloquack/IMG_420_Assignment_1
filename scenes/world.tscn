@@ -1,0 +1,202 @@
+[gd_scene load_steps=25 format=3 uid="uid://d0h07t5wtpr70"]
+
+[ext_resource type="Script" uid="uid://2ohpo0qnfovx" path="res://scripts/world.gd" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://co28on2vm3a6u" path="res://scenes/restart_screen.tscn" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://c4ofxsbndmexq" path="res://scenes/player.tscn" id="2_tlwt5"]
+[ext_resource type="Script" uid="uid://5fbba5jtan4a" path="res://scripts/platform.gd" id="3_036b0"]
+[ext_resource type="PackedScene" uid="uid://chp751ii7swv4" path="res://scenes/death_box.tscn" id="4_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://df52o4ffgr4nc" path="res://scenes/win_screen.tscn" id="4_w7kh3"]
+[ext_resource type="PackedScene" uid="uid://kf224c7vkc3g" path="res://scenes/bounce_pad.tscn" id="6_dwbse"]
+[ext_resource type="PackedScene" uid="uid://cbtavdyenutb7" path="res://scenes/speed_gate.tscn" id="7_pkg7o"]
+[ext_resource type="PackedScene" uid="uid://bmlat33cx1k83" path="res://scenes/hud.tscn" id="8_gbfbk"]
+[ext_resource type="PackedScene" uid="uid://2ww6x3sk6hqs" path="res://scenes/flag.tscn" id="9_7r4gi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwbse"]
+size = Vector2(1073, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_036b0"]
+size = Vector2(20, 400)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pkg7o"]
+size = Vector2(500, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbfbk"]
+size = Vector2(329, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ioo17"]
+size = Vector2(20, 637)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wse8f"]
+size = Vector2(20, 533)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ic0uy"]
+size = Vector2(100, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k3n1d"]
+size = Vector2(694.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2o6r5"]
+size = Vector2(20, 500)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70uel"]
+size = Vector2(1817, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4mrxx"]
+size = Vector2(1331, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w7kh3"]
+size = Vector2(1291, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e3hyu"]
+size = Vector2(2138.5, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5onr"]
+size = Vector2(300, 20)
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_f3sb7")
+
+[node name="HUD" parent="." instance=ExtResource("8_gbfbk")]
+
+[node name="RestartScreen" parent="." instance=ExtResource("2_fj7yv")]
+visible = false
+
+[node name="WinScreen" parent="." instance=ExtResource("4_w7kh3")]
+
+[node name="PlayerStartPosition" type="Marker2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("2_tlwt5")]
+
+[node name="Platforms" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms"]
+position = Vector2(58.5, 70)
+shape = SubResource("RectangleShape2D_dwbse")
+script = ExtResource("3_036b0")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Platforms"]
+position = Vector2(605, -120)
+shape = SubResource("RectangleShape2D_036b0")
+script = ExtResource("3_036b0")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Platforms"]
+position = Vector2(1349, -310)
+shape = SubResource("RectangleShape2D_pkg7o")
+script = ExtResource("3_036b0")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Platforms"]
+z_index = -1
+position = Vector2(779.5, -310)
+shape = SubResource("RectangleShape2D_gbfbk")
+script = ExtResource("3_036b0")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Platforms"]
+position = Vector2(1589, -638.5)
+shape = SubResource("RectangleShape2D_ioo17")
+script = ExtResource("3_036b0")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Platforms"]
+position = Vector2(1229, -911.5)
+shape = SubResource("RectangleShape2D_wse8f")
+script = ExtResource("3_036b0")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Platforms"]
+position = Vector2(1169, -1168)
+shape = SubResource("RectangleShape2D_ic0uy")
+script = ExtResource("3_036b0")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Platforms"]
+position = Vector2(3407.75, -1676)
+shape = SubResource("RectangleShape2D_k3n1d")
+script = ExtResource("3_036b0")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Platforms"]
+position = Vector2(4663, -2212.5)
+shape = SubResource("RectangleShape2D_2o6r5")
+script = ExtResource("3_036b0")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Platforms"]
+position = Vector2(3462.5, -2356)
+shape = SubResource("RectangleShape2D_70uel")
+script = ExtResource("3_036b0")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Platforms"]
+position = Vector2(6717.5, -2912)
+shape = SubResource("RectangleShape2D_4mrxx")
+script = ExtResource("3_036b0")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="Platforms"]
+position = Vector2(-13.5, -1619)
+shape = SubResource("RectangleShape2D_w7kh3")
+script = ExtResource("3_036b0")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="Platforms"]
+position = Vector2(579.25, -1740)
+shape = SubResource("RectangleShape2D_e3hyu")
+script = ExtResource("3_036b0")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="Platforms"]
+position = Vector2(3845, -2833)
+shape = SubResource("RectangleShape2D_q5onr")
+script = ExtResource("3_036b0")
+
+[node name="DeathArea" parent="." instance=ExtResource("4_aqk2v")]
+position = Vector2(3679, 222)
+
+[node name="BouncePad" parent="." instance=ExtResource("6_dwbse")]
+position = Vector2(1069, -1168)
+
+[node name="BouncePad2" parent="." instance=ExtResource("6_dwbse")]
+position = Vector2(3805, -1676)
+
+[node name="BouncePad3" parent="." instance=ExtResource("6_dwbse")]
+position = Vector2(2504, -2356)
+
+[node name="BouncePad4" parent="." instance=ExtResource("6_dwbse")]
+position = Vector2(4045, -2833)
+
+[node name="BouncePad5" parent="." instance=ExtResource("6_dwbse")]
+position = Vector2(4953, -2833)
+
+[node name="SpeedGate" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(1879, -1878)
+direction = 1
+
+[node name="SpeedGate2" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(3745, -1736)
+
+[node name="SpeedGate3" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(5309, -3325)
+direction = 1
+
+[node name="Flag" parent="." instance=ExtResource("9_7r4gi")]
+position = Vector2(7286, -2983)
+
+[node name="SpeedGate4" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(426, -1680)
+direction = -1
+
+[node name="SpeedGate5" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(-351, -1800)
+direction = 1
+
+[node name="SpeedGate6" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(3636, -2416)
+direction = -1
+
+[node name="SpeedGate7" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(2599, -2933)
+direction = 1
+
+[node name="SpeedGate8" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(5309, -3425)
+direction = 1
+
+[node name="SpeedGate9" parent="." instance=ExtResource("7_pkg7o")]
+position = Vector2(5309, -3225)
+direction = 1
+
+[connection signal="death" from="." to="." method="_on_death"]
+[connection signal="restart" from="." to="." method="_on_restart"]
+[connection signal="win" from="." to="." method="_on_win"]
+[connection signal="boost" from="Player" to="." method="_on_player_boost"]

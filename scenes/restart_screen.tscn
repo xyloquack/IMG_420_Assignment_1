@@ -1,10 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://co28on2vm3a6u"]
 
-[ext_resource type="Script" uid="uid://b0rrerfkfw0a1" path="res://restart_screen.gd" id="1_3s4qe"]
+[ext_resource type="Script" uid="uid://b0rrerfkfw0a1" path="res://scripts/restart_screen.gd" id="1_7n4ce"]
 
 [node name="RestartScreen" type="CanvasLayer"]
 process_mode = 3
-script = ExtResource("1_3s4qe")
+script = ExtResource("1_7n4ce")
 
 [node name="RestartButton" type="Button" parent="."]
 anchors_preset = 8
