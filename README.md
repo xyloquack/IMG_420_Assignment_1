@@ -1,0 +1,2 @@
+# Playing the game #
+This is a simple platformer with basic mechanics and a timer to compete against yourself with. You are able to move left, right, and jump. There are a couple ways to interact with the environment, like jumping off of walls, using bounce pads, or using the speed gates that will give you a boost in their designated direction. Your goal is to reach the flag at the end of the short experience. Good luck!
