@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d0h07t5wtpr70"]
+[gd_scene load_steps=26 format=3 uid="uid://d0h07t5wtpr70"]
 
 [ext_resource type="Script" uid="uid://2ohpo0qnfovx" path="res://scripts/world.gd" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://co28on2vm3a6u" path="res://scenes/restart_screen.tscn" id="2_fj7yv"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cbtavdyenutb7" path="res://scenes/speed_gate.tscn" id="7_pkg7o"]
 [ext_resource type="PackedScene" uid="uid://bmlat33cx1k83" path="res://scenes/hud.tscn" id="8_gbfbk"]
 [ext_resource type="PackedScene" uid="uid://2ww6x3sk6hqs" path="res://scenes/flag.tscn" id="9_7r4gi"]
+[ext_resource type="Texture2D" uid="uid://s1xesan1okmv" path="res://sprites/sign.png" id="11_e3hyu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwbse"]
 size = Vector2(1073, 20)
@@ -140,61 +141,71 @@ position = Vector2(3845, -2833)
 shape = SubResource("RectangleShape2D_q5onr")
 script = ExtResource("3_036b0")
 
-[node name="DeathArea" parent="." instance=ExtResource("4_aqk2v")]
-position = Vector2(3679, 222)
+[node name="BouncePads" type="Node2D" parent="."]
 
-[node name="BouncePad" parent="." instance=ExtResource("6_dwbse")]
+[node name="BouncePad" parent="BouncePads" instance=ExtResource("6_dwbse")]
 position = Vector2(1069, -1168)
 
-[node name="BouncePad2" parent="." instance=ExtResource("6_dwbse")]
+[node name="BouncePad2" parent="BouncePads" instance=ExtResource("6_dwbse")]
 position = Vector2(3805, -1676)
 
-[node name="BouncePad3" parent="." instance=ExtResource("6_dwbse")]
+[node name="BouncePad3" parent="BouncePads" instance=ExtResource("6_dwbse")]
 position = Vector2(2504, -2356)
 
-[node name="BouncePad4" parent="." instance=ExtResource("6_dwbse")]
+[node name="BouncePad4" parent="BouncePads" instance=ExtResource("6_dwbse")]
 position = Vector2(4045, -2833)
 
-[node name="BouncePad5" parent="." instance=ExtResource("6_dwbse")]
+[node name="BouncePad5" parent="BouncePads" instance=ExtResource("6_dwbse")]
 position = Vector2(4953, -2833)
 
-[node name="SpeedGate" parent="." instance=ExtResource("7_pkg7o")]
+[node name="SpeedGates" type="Node2D" parent="."]
+
+[node name="SpeedGate" parent="SpeedGates" instance=ExtResource("7_pkg7o")]
 position = Vector2(1879, -1878)
 direction = 1
 
-[node name="SpeedGate2" parent="." instance=ExtResource("7_pkg7o")]
+[node name="SpeedGate2" parent="SpeedGates" instance=ExtResource("7_pkg7o")]
 position = Vector2(3745, -1736)
 
-[node name="SpeedGate3" parent="." instance=ExtResource("7_pkg7o")]
+[node name="SpeedGate3" parent="SpeedGates" instance=ExtResource("7_pkg7o")]
 position = Vector2(5309, -3325)
 direction = 1
+
+[node name="SpeedGate4" parent="SpeedGates" instance=ExtResource("7_pkg7o")]
+position = Vector2(426, -1680)
+direction = -1
+
+[node name="SpeedGate5" parent="SpeedGates" instance=ExtResource("7_pkg7o")]
+position = Vector2(-351, -1800)
+direction = 1
+
+[node name="SpeedGate6" parent="SpeedGates" instance=ExtResource("7_pkg7o")]
+position = Vector2(3636, -2416)
+direction = -1
+
+[node name="SpeedGate7" parent="SpeedGates" instance=ExtResource("7_pkg7o")]
+position = Vector2(2599, -2933)
+direction = 1
+
+[node name="SpeedGate8" parent="SpeedGates" instance=ExtResource("7_pkg7o")]
+position = Vector2(5309, -3425)
+direction = 1
+
+[node name="SpeedGate9" parent="SpeedGates" instance=ExtResource("7_pkg7o")]
+position = Vector2(5309, -3225)
+direction = 1
+
+[node name="DeathArea" parent="." instance=ExtResource("4_aqk2v")]
+position = Vector2(3679, 222)
 
 [node name="Flag" parent="." instance=ExtResource("9_7r4gi")]
 position = Vector2(7286, -2983)
 
-[node name="SpeedGate4" parent="." instance=ExtResource("7_pkg7o")]
-position = Vector2(426, -1680)
-direction = -1
-
-[node name="SpeedGate5" parent="." instance=ExtResource("7_pkg7o")]
-position = Vector2(-351, -1800)
-direction = 1
-
-[node name="SpeedGate6" parent="." instance=ExtResource("7_pkg7o")]
-position = Vector2(3636, -2416)
-direction = -1
-
-[node name="SpeedGate7" parent="." instance=ExtResource("7_pkg7o")]
-position = Vector2(2599, -2933)
-direction = 1
-
-[node name="SpeedGate8" parent="." instance=ExtResource("7_pkg7o")]
-position = Vector2(5309, -3425)
-direction = 1
-
-[node name="SpeedGate9" parent="." instance=ExtResource("7_pkg7o")]
-position = Vector2(5309, -3225)
-direction = 1
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-131, -68)
+scale = Vector2(2, 2)
+texture = ExtResource("11_e3hyu")
 
 [connection signal="death" from="." to="." method="_on_death"]
 [connection signal="restart" from="." to="." method="_on_restart"]

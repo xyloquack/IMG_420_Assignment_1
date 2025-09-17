@@ -77,9 +77,20 @@ func get_direction(delta):
 		$WallJumpTimer.start()
 		
 	was_on_wall = on_wall
+	
+func change_sprite():
+	if velocity.x < 0:
+		$AnimatedSprite2D.flip_h = true
+	if velocity.x > 0:
+		$AnimatedSprite2D.flip_h = false
+	if velocity.x == 0:
+		$AnimatedSprite2D.animation = "idle"
+	else:
+		$AnimatedSprite2D.animation = "running"
 
 func _physics_process(delta):
 	get_direction(delta)
+	change_sprite()
 	move_and_slide()
 
 func _on_kill() -> void:
