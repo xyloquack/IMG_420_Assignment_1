@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://30v7oqq7qk57"]
+
+[ext_resource type="Script" uid="uid://djrtpb1klcr3m" path="res://bounce_pad.gd" id="1_g6spo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sqs3k"]
+size = Vector2(100, 20)
+
+[node name="BouncePad" type="Area2D"]
+script = ExtResource("1_g6spo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sqs3k")
+debug_color = Color(0.131792, 0.765012, 0, 0.42)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

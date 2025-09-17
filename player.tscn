@@ -31,4 +31,9 @@ one_shot = true
 wait_time = 0.1
 one_shot = true
 
+[node name="BounceCooldown" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="bounce" from="." to="." method="_on_bounce"]
 [connection signal="kill" from="." to="." method="_on_kill"]

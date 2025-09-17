@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0h07t5wtpr70"]
+[gd_scene load_steps=13 format=3 uid="uid://d0h07t5wtpr70"]
 
 [ext_resource type="Script" uid="uid://2ohpo0qnfovx" path="res://world.gd" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://co28on2vm3a6u" path="res://restart_screen.tscn" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://c4ofxsbndmexq" path="res://player.tscn" id="2_tlwt5"]
 [ext_resource type="Script" uid="uid://5fbba5jtan4a" path="res://platform.gd" id="3_036b0"]
 [ext_resource type="PackedScene" uid="uid://chp751ii7swv4" path="res://death_box.tscn" id="4_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://30v7oqq7qk57" path="res://bounce_pad.tscn" id="6_dwbse"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dwbse"]
 size = Vector2(500, 20)
@@ -69,6 +70,9 @@ visible = false
 
 [node name="DeathArea" parent="." instance=ExtResource("4_aqk2v")]
 position = Vector2(2000, 900)
+
+[node name="BouncePad" parent="." instance=ExtResource("6_dwbse")]
+position = Vector2(797, -932)
 
 [connection signal="death" from="." to="." method="_on_death"]
 [connection signal="restart" from="." to="." method="_on_restart"]

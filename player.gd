@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal kill
+signal bounce
 
 @export var max_speed: float
 @export var acceleration: float
@@ -77,3 +78,9 @@ func _on_kill() -> void:
 	print("Death!")
 	print(world)
 	world.emit_signal("death")
+
+
+func _on_bounce() -> void:
+	if $BounceCooldown.is_stopped():
+		$BounceCooldown.start()
+		velocity.y = -1500
